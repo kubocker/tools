@@ -16,7 +16,6 @@
     "node-sass": "^4.13.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "reselect": "^4.0.0"
@@ -42,6 +41,8 @@
     "@testing-library/react": "^9.3.1",
     "@types/googlemaps": "^3.38.0",
     "firebase": "^7.19.0",
+    "history": "^5.0.0",
+    "react-router": "^5.2.0",
     "typescript": "3.6.3"
   }
 }
