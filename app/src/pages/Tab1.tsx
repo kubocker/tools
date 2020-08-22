@@ -1,9 +1,30 @@
-import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+/* react */
+import React, {
+  useContext,
+  useEffect,
+} from 'react';
+
+/* ionic */
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar
+} from '@ionic/react';
+
+/* app */
 import ExploreContainer from '../components/ExploreContainer';
+import { authGuard } from '../Routing';
 import './Tab1.scss';
 
 const Tab1: React.FC = () => {
+
+  // useEffect(() => {
+  //   authGuard(dispatch, match, history);
+
+  // }, [dispatch, history, match]);
+
   return (
     <IonPage>
       <IonHeader>
