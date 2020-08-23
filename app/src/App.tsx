@@ -1,5 +1,8 @@
+/* react */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+
+/* ionic */
 import {
   IonApp,
   IonRouterOutlet,
@@ -25,12 +28,15 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
+
+/* app */
 import { AppContextProvider } from './State';
+import Tabs from './Tabs';
 
 import LoginPage from './pages/Login';
 import ForgotPasswordPage from './pages/ForgotPassword';
 import SignupPage from './pages/Signup';
-import Tabs from './Tabs';
 
 const App: React.FC = () => (
   <AppContextProvider>

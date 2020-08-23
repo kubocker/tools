@@ -1,10 +1,19 @@
+/* react */
 import React from 'react';
-
-import { IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
-
 import { Route, Redirect, RouteComponentProps } from 'react-router';
 
+/* ionic */
+import {
+  IonTabs,
+  IonRouterOutlet,
+  IonTabBar,
+  IonTabButton,
+  IonIcon,
+  IonLabel
+} from '@ionic/react';
 import { home, search, cog } from 'ionicons/icons';
+
+/* app */
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Settings from './pages/Settings';
