@@ -1,13 +1,8 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import {
   IonApp,
-  IonIcon,
-  IonLabel,
   IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
   IonPage
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -30,13 +25,12 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-
-/* app */
 import { AppContextProvider } from './State';
 
 import LoginPage from './pages/Login';
+import ForgotPasswordPage from './pages/ForgotPassword';
+import SignupPage from './pages/Signup';
 import Tabs from './Tabs';
-
 
 const App: React.FC = () => (
   <AppContextProvider>
@@ -45,9 +39,9 @@ const App: React.FC = () => (
         <IonPage>
           <IonRouterOutlet>
             <Route path="/login" component={LoginPage} exact={true} />
-            {/* <Route path="/forgot-password" component={ForgotPasswordPage} exact={true} />
-            <Route path="/signup" component={SignupPage} exact={true} /> */}
-            <Route exact={true} path="/" render={() => <Redirect to="/app/tab1" />} />
+            <Route path="/forgot-password" component={ForgotPasswordPage} exact={true} />
+            <Route path="/signup" component={SignupPage} exact={true} />
+            <Route exact={true} path="/" render={() => <Redirect to="/app/home" />} />
           </IonRouterOutlet>
           <Route path="/app" component={Tabs} />
         </IonPage>
