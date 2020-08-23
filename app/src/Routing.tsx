@@ -23,19 +23,20 @@ const {
  * @param match    -
  * @param history  -
  */
-export const authGuard = async (dispatch: any, match: any, history: any) => {
+export const authGuard = async (
+    dispatch: any,
+    match: any,
+    history: any
+  ) => {
   if (!await hasExistingSession()) {
     return await Modals.alert({
         title: '確認',
-        message: '認証が取れていません<br>ログアウトします',
+        message: '認証が取れていません\nログアウトします',
         buttonTitle: 'OK'
       })
       .then(_ => {
-        setTimeout(() => {
-          history.replace('/login');
-      
-        }, 1500);
-      })
+        history.replace('/login');
+      });
   }
 
   const user$ = await getUser();
