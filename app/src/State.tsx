@@ -56,29 +56,45 @@ const logger = (reducer: any) => {
   return reducerWithLogger;
 }
 
-let AppContext = (React as any).createContext();
 
 const loggerReducer = logger(reducer);
 
-function AppContextProvider(props: any) {
+
+/**
+ * 
+ */
+export interface AppContextState {
+
+}
+
+
+/**
+ * 
+ */
+export const AppContext = (React as any).createContext();
+
+/**
+ * 
+ * @param props 
+ */
+export function AppContextProvider(props: any) {
   const fullInitialState = {
     ...initialState,
     user
   }
 
-  let [state, dispatch] = useReducer(loggerReducer, fullInitialState);
-  let value = { state, dispatch };
-
-  if (user !== state.user) {
-    // Sync the user back to local storage whenever it changes
-    window.localStorage.setItem('user', JSON.stringify(state.user));
-  }
-
+  const [state, dispatch] = useReducer(loggerReducer, fullInitialState);
   return (
-    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
+    <AppContext.Provider value={{
+        state: state,
+        dispatch
+    }}>
+      {props.children}
+    </AppContext.Provider>
   );
 }
 
-let AppContextConsumer = AppContext.Consumer;
-
-export { AppContext, AppContextProvider, AppContextConsumer };
+/**
+ * 
+ */
+export const AppContextConsumer = AppContext.Consumer;

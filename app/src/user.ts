@@ -1,7 +1,12 @@
+/* firebase */
 import * as firebase from 'firebase/app';
 
+/* app */
 import { FirebaseApp } from './firebaseApp';
 
+/**
+ * セッション確認
+ */
 export function hasExistingSession() {
   return new Promise((resolve) => {
     FirebaseApp.auth().onAuthStateChanged((user) => {
@@ -14,16 +19,22 @@ export function hasExistingSession() {
   });
 }
 
+/**
+ * ユーザー取得
+ */
 export async function getUser() {
   const user = FirebaseApp.auth().currentUser;
-
   if (!user) {
     return null;
   }
-
   return user!;
 }
 
+/**
+ * ログイン / サインイン
+ * @param email    - メールアドレス
+ * @param password - パスワード
+ */
 export async function login (email: string, password: string): Promise<firebase.User> {
   await FirebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
@@ -32,13 +43,14 @@ export async function login (email: string, password: string): Promise<firebase.
   return user.user!;
 }
 
+/**
+ * 登録
+ * @param param0 
+ */
 export async function signup({ name, email, password }: { name: string, email: string, password: string }): Promise<firebase.User> {
   await FirebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
   const user = await FirebaseApp.auth().createUserWithEmailAndPassword(email, password);
-
-  console.log('Created user', user);
-
   // Create the associated user table
   await FirebaseApp.firestore().collection("users").doc(user.user!.uid).set({
     bio: ''
@@ -49,10 +61,17 @@ export async function signup({ name, email, password }: { name: string, email: s
   return user.user!;
 }
 
+/**
+ * ログアウト / サインアウト
+ */
 export function logout() {
   return FirebaseApp.auth().signOut();
 }
 
+/**
+ * メールアドレス変更
+ * @param email - メールアドレス
+ */
 export function sendPasswordResetEmail(email: string) {
   return FirebaseApp.auth().sendPasswordResetEmail(email);
 }

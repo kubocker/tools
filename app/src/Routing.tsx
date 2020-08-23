@@ -1,17 +1,43 @@
+
+/* capacitor */
+import { Plugins } from '@capacitor/core';
+
+/* app */
+import { Actions } from './State';
 import { hasExistingSession, getUser } from './user';
 
-import { Actions } from './State';
+/**
+ * Capacitor
+ * プラグイン
+ */
+const {
+  // モーダル
+  Modals,
 
+} = Plugins;
+
+
+/**
+ * 認証ガード
+ * @param dispatch -
+ * @param match    -
+ * @param history  -
+ */
 export const authGuard = async (dispatch: any, match: any, history: any) => {
   if (!await hasExistingSession()) {
-    history.replace('/login');
-    return;
+    return await Modals.alert({
+        title: '確認',
+        message: '認証が取れていません<br>ログアウトします',
+        buttonTitle: 'OK'
+      })
+      .then(_ => {
+        setTimeout(() => {
+          history.replace('/login');
+      
+        }, 1500);
+      })
   }
 
-  const fullUser = await getUser();
-
-  dispatch({
-    type: Actions.SetUser,
-    user: fullUser
-  });
+  const user$ = await getUser();
+  dispatch({ type: Actions.SetUser, user: user$ });
 }
